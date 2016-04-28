@@ -1,26 +1,46 @@
 ﻿namespace GarbageCollectr.DataImporter
 {
     using System;
-    using System.IO;
-    using System.Linq;
+
+    using GarbageCollectr.DataImporter.Data;
+
+    using LINQtoCSV;
 
     class Program
     {
         static void Main(string[] args)
         {
-            var rows = File.ReadAllLines(@"C:\Users\Ola_Kar\Downloads\avfallstomningar0.csv");
+            var inputFileDescription = new CsvFileDescription
+            {
+                SeparatorChar = ';',
+                FirstLineHasColumnNames = true
+            };
 
-            var row = from r in rows
-                      select r.Split(',').ToArray();
+            var cc = new CsvContext();
+            var collections = cc.Read<Collection>(@"C:\Users\Ola_Kar\Downloads\avfallstomningar0.csv", inputFileDescription);
 
+            using (var db = new ApplicationDbContext())
+            {
+                foreach (var collection in collections)
+                {
+                    if (collection.Weight > 0)
+                    {
+                        db.GarbageCollections.Add(new GarbageCollection
+                        {
+                            Id = Guid.NewGuid(),
+                            PostalCode = collection.PostalCode,
+                            WasteType = collection.WasteType,
+                            Weight = collection.Weight,
+                            CollectedAt = collection.CollectedAt,
+                            AgreementCode = collection.AgreementCode,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now
+                        });
 
-
-            Console.WriteLine(row.FirstOrDefault().ElementAt(0));
-            Console.ReadLine();
-
-            // Löpnummer; Tömningsdatum; Fordonskod; Avtalskod; Avfallstyp; Händelsetyp; Avtalsbenämning; Registreringsnummer; Vikt; Enhet vikt; Postnummer
-
-
+                        db.SaveChanges();
+                    }
+                }
+            }
         }
     }
 }
