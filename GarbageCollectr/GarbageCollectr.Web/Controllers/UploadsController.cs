@@ -1,4 +1,5 @@
-﻿using GarbageCollectr.Web.Data.Models;
+﻿using System.Linq;
+using GarbageCollectr.Web.Data.Models;
 
 namespace GarbageCollectr.Web.Controllers
 {
@@ -49,10 +50,9 @@ namespace GarbageCollectr.Web.Controllers
                 {
                     DbThings = things,
                     PossibleThings = result.Tags,
-                    AllMaterials = allMaterials
+                    AllMaterials = allMaterials,
+                    IsPerson = result.Faces.Any()
                 };
-
-
 
                 return new JsonResult(createImageResult);
             }
@@ -66,5 +66,6 @@ namespace GarbageCollectr.Web.Controllers
         public Thing[] DbThings { get; set; }
         public CognitiveServicesCaller.Tag[] PossibleThings { get; set; }
         public Material[] AllMaterials { get; set; }
+        public bool IsPerson { get; set; }
     }
 }
