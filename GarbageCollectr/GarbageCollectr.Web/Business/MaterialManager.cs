@@ -40,6 +40,7 @@ namespace GarbageCollectr.Web.Business
             };
 
             _applicationDbContext.Things.Add(newThing);
+            _applicationDbContext.SaveChanges();
 
         }
     }
