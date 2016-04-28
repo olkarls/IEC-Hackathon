@@ -9,7 +9,7 @@
     using Microsoft.Net.Http.Headers;
     using Microsoft.WindowsAzure.Storage;
 
-    [Route("/uploads")]
+    [Route("/material")]
     public class MaterialController : Controller
     {
         private ApplicationDbContext DbContext;

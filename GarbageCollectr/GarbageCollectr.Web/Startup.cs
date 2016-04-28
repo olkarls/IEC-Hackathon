@@ -35,7 +35,7 @@
             services.AddCaching();
             services.AddSession();
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=GarbageCollectr;Trusted_Connection=True;";
+            var connection = @"Server=tcp:garbagecollectr.database.windows.net,1433;Database=GarbageCollectr;User ID=GCadmin@garbagecollectr;Password=Rrwa_?LGSFyR$7YB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30; ";
 
             services.AddEntityFramework()
                 .AddSqlServer()
