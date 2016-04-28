@@ -1,4 +1,6 @@
-﻿namespace GarbageCollectr.Web.Controllers
+﻿using GarbageCollectr.Web.Data.Models;
+
+namespace GarbageCollectr.Web.Controllers
 {
     using System;
 
@@ -39,10 +41,30 @@
 
                 var result = CognitiveServicesCaller.AnalyzeImage(filename, "96595dcf7af241c6a97da31fab5919ec");
 
-                return new JsonResult(result);
+                var things = new ThingsManager(DbContext).GetThingFromTags(result.Tags);
+
+                var allMaterials = new MaterialManager(this.DbContext).GetAll();
+
+                var createImageResult = new CreateImageResult
+                {
+                    DbThings = things,
+                    PossibleThings = result.Tags,
+                    AllMaterials = allMaterials
+                };
+
+
+
+                return new JsonResult(createImageResult);
             }
 
             return new BadRequestResult();
         }
+    }
+
+    public class CreateImageResult
+    {
+        public Thing[] DbThings { get; set; }
+        public CognitiveServicesCaller.Tag[] PossibleThings { get; set; }
+        public Material[] AllMaterials { get; set; }
     }
 }

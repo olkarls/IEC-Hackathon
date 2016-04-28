@@ -7,13 +7,20 @@ namespace GarbageCollectr.Web.Business
 {
     public class ThingsManager
     {
-        public Thing[] GetThingFromTags(ApplicationDbContext appDbContext, CognitiveServicesCaller.Tag[] tags)
+        private readonly ApplicationDbContext _applicationDbContext;
+
+        public ThingsManager(ApplicationDbContext appDbContext)
+        {
+            _applicationDbContext = appDbContext;
+        }
+
+        public Thing[] GetThingFromTags(CognitiveServicesCaller.Tag[] tags)
         {
             tags = tags.OrderBy(t => t.Confidence).ToArray();
             foreach (var tag in tags)
             {
 
-                var dbThings = appDbContext.Things.Where(t => t.TagName == tag.Name);
+                var dbThings = _applicationDbContext.Things.Where(t => t.TagName == tag.Name);
                 if (dbThings.Any())
                 {
                     return dbThings.ToArray();
