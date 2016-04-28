@@ -2,6 +2,7 @@
 using System.Linq;
 using GarbageCollectr.Web.Data;
 using GarbageCollectr.Web.Data.Models;
+using Microsoft.Data.Entity;
 
 namespace GarbageCollectr.Web.Business
 {
@@ -20,7 +21,7 @@ namespace GarbageCollectr.Web.Business
             foreach (var tag in tags)
             {
 
-                var dbThings = _applicationDbContext.Things.Where(t => t.TagName == tag.Name);
+                var dbThings = _applicationDbContext.Things.Include(t => t.Material).Include(t => t.Material.Container).Where(t => t.TagName == tag.Name);
                 if (dbThings.Any())
                 {
                     return dbThings.ToArray();
