@@ -17,7 +17,6 @@ namespace GarbageCollectr.UnitTests2
 
             Assert.NotNull(result);
             Assert.NotNull(result.Tags[0]);
-            Console.WriteLine(result.Tags[0]);
         }
     }
 }
