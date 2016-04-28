@@ -5,7 +5,11 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GarbageCollectr.Web", "GarbageCollectr.Web\GarbageCollectr.Web.xproj", "{DAFB7134-1AC7-4BD1-A5A7-0C5E9648C622}"
 EndProject
+<<<<<<< HEAD
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarbageCollectr.DataImporter", "GarbageCollectr.DataImporter\GarbageCollectr.DataImporter.csproj", "{8695E382-53B1-43A1-91B6-B98A12F7AD48}"
+=======
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GarbageCollectr.UnitTests2", "GarbageCollectr.UnitTests2\GarbageCollectr.UnitTests2.xproj", "{650A5A85-5956-491E-9312-5E25A27D1108}"
+>>>>>>> 1ea516b333d75d6c4cdfe41044528b8910b0b84c
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +21,17 @@ Global
 		{DAFB7134-1AC7-4BD1-A5A7-0C5E9648C622}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAFB7134-1AC7-4BD1-A5A7-0C5E9648C622}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAFB7134-1AC7-4BD1-A5A7-0C5E9648C622}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
+		{8695E382-53B1-43A1-91B6-B98A12F7AD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8695E382-53B1-43A1-91B6-B98A12F7AD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8695E382-53B1-43A1-91B6-B98A12F7AD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8695E382-53B1-43A1-91B6-B98A12F7AD48}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
 		{650A5A85-5956-491E-9312-5E25A27D1108}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{650A5A85-5956-491E-9312-5E25A27D1108}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{650A5A85-5956-491E-9312-5E25A27D1108}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{650A5A85-5956-491E-9312-5E25A27D1108}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 1ea516b333d75d6c4cdfe41044528b8910b0b84c
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

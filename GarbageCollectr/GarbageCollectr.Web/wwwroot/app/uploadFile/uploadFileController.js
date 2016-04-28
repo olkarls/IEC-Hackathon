@@ -1,13 +1,19 @@
 ﻿(function () {
     'use strict';
+    var controllerId = 'uploadFileController';
+    angular.module('app').controller(controllerId, ['$scope', '$http', uploadFileController]);
 
-    angular
-        .module('app')
-        .controller('uploadFileController', uploadFileController);
+    function uploadFileController($scope, $http) {
+        $scope.upload = function (file) {
 
-    moviesController.$inject = ['$scope'];
-
-    function moviesController($scope) {
-
+            console.log(file);
+            var fd = new FormData();
+            fd.append("file", file.file);
+            $http.post("uploads", fd, {
+                withCredentials: true,
+                headers: { 'Content-Type': undefined },
+                transformRequest: angular.identity
+            });
+        }
     }
 })();

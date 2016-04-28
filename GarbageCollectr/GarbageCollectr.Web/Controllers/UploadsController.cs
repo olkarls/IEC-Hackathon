@@ -27,9 +27,9 @@ namespace GarbageCollectr.Web.Controllers
             if (file.Length > 0)
             {
                 var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-                var filename = Guid.NewGuid() + parsedContentDisposition.FileName;
+                var filename = Guid.NewGuid() + parsedContentDisposition.FileName.Substring(parsedContentDisposition.FileName.LastIndexOf('.')).Replace("\"", "");
 
-                var container = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=garbagecollectrstorage;AccountKey=wrhFgNhmUkCl+VtrIAxsGbgR5Gjl6+MgqIqCsiIfACkzB/4x5TFhojt9U4W4bEazRS61oS++jM7CF++L25COww==").CreateCloudBlobClient().GetContainerReference("Images");
+                var container = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=garbagecollectrstorage;AccountKey=wrhFgNhmUkCl+VtrIAxsGbgR5Gjl6+MgqIqCsiIfACkzB/4x5TFhojt9U4W4bEazRS61oS++jM7CF++L25COww==").CreateCloudBlobClient().GetContainerReference("images");
                 container.CreateIfNotExists();
                 
                 var blockBlob = container.GetBlockBlobReference(filename);
