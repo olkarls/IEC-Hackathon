@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -18,8 +17,6 @@ namespace GarbageCollectr.Web.Business
 
             // Request parameters
             var uri = "https://api.projectoxford.ai/vision/v1.0/analyze";
-
-            HttpResponseMessage response;
 
             // Request body
             byte[] byteData = Encoding.UTF8.GetBytes("{'url':" + imageUrl + "}");
