@@ -2,6 +2,7 @@
 using System.Linq;
 using GarbageCollectr.Web.Data;
 using GarbageCollectr.Web.Data.Models;
+using Microsoft.Data.Entity;
 
 namespace GarbageCollectr.Web.Business
 {
@@ -16,7 +17,7 @@ namespace GarbageCollectr.Web.Business
 
         public Material[] GetAll()
         {
-            return _applicationDbContext.Materials.ToArray();
+            return _applicationDbContext.Materials.Include(m => m.Container).ToArray();
         }
 
         public void AddMaterialToThing(string thingName, Guid materialId)
@@ -39,6 +40,7 @@ namespace GarbageCollectr.Web.Business
             };
 
             _applicationDbContext.Things.Add(newThing);
+            _applicationDbContext.SaveChanges();
 
         }
     }

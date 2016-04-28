@@ -14,7 +14,7 @@
                     controller: 'uploadFileController'
                 }).
         otherwise({
-            redirectTo: '/uploadFile'
+            redirectTo: '/'
         });
         }]);
 })();

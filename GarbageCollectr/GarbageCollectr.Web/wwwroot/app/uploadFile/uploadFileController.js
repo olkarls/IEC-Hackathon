@@ -5,8 +5,6 @@
 
     function uploadFileController($scope, $http) {
         $scope.upload = function (file) {
-
-            console.log(file);
             var fd = new FormData();
             fd.append("file", file.file);
             $http.post("uploads", fd, {
