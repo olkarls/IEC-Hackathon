@@ -28,9 +28,11 @@
         }
 
         [HttpPost]
-        public IActionResult AddMaterialToThing(string thing, string material)
+        public IActionResult AddMaterialToThing(string thing, Guid materialId)
         {
-            new MaterialManager(this.DbContext).
+            new MaterialManager(this.DbContext).AddMaterialToThing(thing, materialId);
+
+            return new EmptyResult();
         }
     }
 }
