@@ -9,7 +9,7 @@ namespace GarbageCollectr.Web.Business
 {
     public class CognitiveServicesCaller
     {
-        public static AnalysisResult AnalyzeImage(string imageUrl, string subscriptionKey)
+        public static AnalysisResult AnalyzeImage(string filename, string subscriptionKey)
         {
             var client = new HttpClient();
 
@@ -20,7 +20,7 @@ namespace GarbageCollectr.Web.Business
             var uri = "https://api.projectoxford.ai/vision/v1.0/analyze?visualFeatures=Categories,Tags,Description,Faces,ImageType,Color,Adult";
 
             // Request body
-            byte[] byteData = Encoding.UTF8.GetBytes("{'url':'" + imageUrl + "'}");
+            byte[] byteData = Encoding.UTF8.GetBytes("{'url':" + "https://garbagecollectrstorage.blob.core.windows.net/" + filename + "}");
 
             using (var content = new ByteArrayContent(byteData))
             {
