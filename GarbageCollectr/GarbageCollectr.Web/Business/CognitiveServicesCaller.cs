@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -16,7 +17,7 @@ namespace GarbageCollectr.Web.Business
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
 
             // Request parameters
-            var uri = "https://api.projectoxford.ai/vision/v1.0/analyze";
+            var uri = "https://api.projectoxford.ai/vision/v1.0/analyze?visualFeatures=Categories,Tags,Description,Faces,ImageType,Color,Adult";
 
             // Request body
             byte[] byteData = Encoding.UTF8.GetBytes("{'url':" + "https://garbagecollectrstorage.blob.core.windows.net/" + filename + "}");
@@ -25,8 +26,10 @@ namespace GarbageCollectr.Web.Business
             {
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var result = client.PostAsync(uri, content).Result.Content.ReadAsStringAsync().Result;
-
-                return JsonConvert.DeserializeObject<AnalysisResult>(result);
+                Trace.WriteLine(result);
+                var analysisResult = JsonConvert.DeserializeObject<AnalysisResult>(result);
+                Trace.WriteLine(analysisResult);
+                return analysisResult;
             }
 
         }

@@ -11,7 +11,7 @@
             var rows = File.ReadAllLines(@"C:\Users\Ola_Kar\Downloads\avfallstomningar0.csv");
 
             var row = from r in rows
-                      select (r.Split(',')).ToArray();
+                      select r.Split(',').ToArray();
 
 
 

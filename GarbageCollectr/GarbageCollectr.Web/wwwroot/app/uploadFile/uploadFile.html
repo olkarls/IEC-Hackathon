@@ -1,5 +1,4 @@
-﻿<div class="container-fluid">
-    <div class="row"></div>
+﻿<div class="container-fluid" data-ng-controller="uploadFileController">
     <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
             <div class="panel panel-success">
@@ -7,7 +6,15 @@
                     <h1>Skräpet</h1>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-success btn-lg btn-block">Upload</button>
+                    <div flow-init="{singleFile:true, target:'Upload'}" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+                        <div class="col-xs-12">
+                            <span class="btn" ng-show="!$flow.files.length" flow-btn><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=välj+bild"><input type="file" style="visibility: hidden; position: absolute;"></span>
+                            <span class="btn" ng-show="$flow.files.length" flow-btn><img flow-img="$flow.files[0]"><input id="file" name="file" type="file" style="visibility: hidden; position: absolute;" onchange="angular.element(this).scope().uploadFile(this.files)"></span>
+                        </div>
+                        <div class="col-xs-12" ng-show="$flow.files.length">
+                            <input class="btn btn-success btn-lg btn-block" type="button" data-ng-click="upload($flow.files[0])" value="Sortera" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

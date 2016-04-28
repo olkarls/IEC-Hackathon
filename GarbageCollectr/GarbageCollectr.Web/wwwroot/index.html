@@ -4,16 +4,19 @@
     <meta charset="utf-8" />
     <title>GarbageCollectr</title>
 
-    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="styles/styles.css" rel="stylesheet" />
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"
+          rel="stylesheet" />
 </head>
-<body>
+<body flow-prevent-drop>
     <div data-ng-include="'app/uploadFile/uploadFile.html'"></div>
 
     <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-route/angular-route.min.js"></script>
     <script src="lib/jquery/dist/jquery.js"></script>
-    <script src="lib/angular/angular.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="lib/ng-flow/dist/ng-flow-standalone.min.js"></script>
 
     <script src="app/app.js"></script>
     <script src="app/uploadFile/uploadFileController.js"></script>
