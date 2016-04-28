@@ -7,5 +7,7 @@
         public string TagName { get; set; }
 
         public Guid MaterialId { get; set; }
+
+        public Material Material { get; set; }
     }
 }
