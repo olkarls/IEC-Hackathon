@@ -8,7 +8,7 @@ namespace GarbageCollectr.Web.Business
 {
     public class CognitiveServicesCaller
     {
-        static AnalysisResult AnalyzeImage(string imageUrl, string subscriptionKey)
+        public static AnalysisResult AnalyzeImage(string imageUrl, string subscriptionKey)
         {
             var client = new HttpClient();
 
@@ -26,7 +26,9 @@ namespace GarbageCollectr.Web.Business
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var result = client.PostAsync(uri, content).Result.Content.ReadAsStringAsync().Result;
 
-                return JsonConvert.DeserializeObject<AnalysisResult>(result);
+                var analysisResult = JsonConvert.DeserializeObject<AnalysisResult>(result);
+                Console.WriteLine(analysisResult);
+                return analysisResult;
             }
 
         }
