@@ -21,7 +21,7 @@ namespace GarbageCollectr.Web.Business
             foreach (var tag in tags)
             {
 
-                var dbThings = _applicationDbContext.Things.Include(t => t.Material).Include(t => t.Material.Container).Where(t => t.TagName == tag.Name);
+                var dbThings = _applicationDbContext.Things.Include(t => t.Material.Container).Where(t => t.TagName == tag.Name);
                 if (dbThings.Any())
                 {
                     return dbThings.ToArray();
