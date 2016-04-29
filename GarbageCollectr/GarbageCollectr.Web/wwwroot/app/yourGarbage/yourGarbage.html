@@ -1,0 +1,15 @@
+﻿<div class="container-fluid" data-ng-controller="yourGarbageController">
+    <div class="row">
+        <div class="col-sm-5 col-sm-offset-3">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h1>Your garbage!</h1>
+                </div>
+                <div class="panel-body">
+                    <div data-ng-show="isLoading" class="loading"></div>
+                    <highchart id="garbageChart" config="garbageChartConfig"></highchart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

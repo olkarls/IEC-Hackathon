@@ -6,8 +6,11 @@
     function uploadFileController($scope, $http) {
         $scope.responseData = null;
         $scope.activeUserStep = "start";
+        $scope.isLoading = false;
         
         $scope.upload = function (file) {
+            $scope.isLoading = true;
+
             var fd = new FormData();
             fd.append("file", file.file);
 
@@ -21,19 +24,26 @@
             }).then(function (response) {
                 console.log(response);
                 $scope.responseData = response.data;
+                $scope.isLoading = false;
+                if ($scope.responseData.IsPerson) {
+                    $scope.activeUserStep = "itsAPerson";
+                    return;
+                }
 
                 if (!$scope.responseData.DbThings.length && $scope.responseData.PossibleThings.length) {
                     $scope.activeUserStep = 'confirmThing';
+                    return;
                 }
 
                 if ($scope.responseData.DbThings.length === 1) {
                     $scope.activeUserStep = "weThinkWeKnow";
+                    return;
                 }
 
                 if ($scope.responseData.DbThings.length > 1) {
                     $scope.activeUserStep = "moreThanOneDbThing";
+                    return;
                 }
-
             }, function(response) {
                 
             });

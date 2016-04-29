@@ -13,6 +13,10 @@
                     templateUrl: 'app/uploadFile/uploadFile.html',
                     controller: 'uploadFileController'
                 }).
+                when('/', {
+                    templateUrl: 'app/yourGarbage/yourGarbage.html',
+                    controller: 'yourGarbageController'
+                }).
         otherwise({
             redirectTo: '/'
         });
