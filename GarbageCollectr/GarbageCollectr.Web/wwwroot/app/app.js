@@ -3,7 +3,8 @@
 
     var app = angular.module('app', [
         'flow',
-        'ngRoute'
+        'ngRoute',
+        'highcharts-ng'
     ]);
 
     app.config(['$routeProvider',
@@ -13,7 +14,7 @@
                     templateUrl: 'app/uploadFile/uploadFile.html',
                     controller: 'uploadFileController'
                 }).
-                when('/', {
+                when('/yourGarbage', {
                     templateUrl: 'app/yourGarbage/yourGarbage.html',
                     controller: 'yourGarbageController'
                 }).

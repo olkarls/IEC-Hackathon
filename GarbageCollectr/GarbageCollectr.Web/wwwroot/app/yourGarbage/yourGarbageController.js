@@ -7,24 +7,20 @@
         $scope.responseData = null;
         $scope.isLoading = false;
 
-        $scope.upload = function (file) {
+        $scope.getGarbage = function (postalCode) {
             $scope.isLoading = true;
-
-            var fd = new FormData();
-            fd.append("file", file.file);
-
             $http({
-                url: 'uploads',
+                url: 'stats',
                 method: 'POST',
-                data: fd,
-                withCredentials: true,
-                headers: { 'Content-Type': undefined },
-                transformRequest: angular.identity
+                params: {
+                    postalCode: postalCode
+                }
             }).then(function (response) {
                 console.log(response);
                 $scope.responseData = response.data;
                 $scope.isLoading = false;
 
+                $scope.garbageChartConfig = initGarbageChart($scope.responseData);
 
             }, function (response) {
 
@@ -47,34 +43,26 @@
             }
             ];
 
-            var maxNumberOfTourParticipants = 0;
+            angular.forEach(garbageData, function (garbage) {
+                console.log("garbage", garbage)
+                categories.push(garbage.CollectedAt);
 
-            angular.forEach(playerStats1.tourStats.placeInEachTournament, function (tourPlayer1) {
-                angular.forEach(playerStats2.tourStats.placeInEachTournament, function (tourPlayer2) {
-                    if (tourPlayer1.tourId === tourPlayer2.tourId) {
-                        var player1Tour = {
-                            y: tourPlayer1.place,
-                            tourParticipants: tourPlayer1.tourParticipants
-                        };
-                        var player2Tour = {
-                            y: tourPlayer2.place,
-                            tourParticipants: tourPlayer2.tourParticipants
-                        };
+                if (garbage.WasteType == 'Hushållsavfall') {
+                    series[0].data.push(
+                    {
+                        y: garbage.TotalWeight
 
-                        series[0].data.push(player1Tour);
-                        series[1].data.push(player2Tour);
-                        categories.push(tourPlayer1.tourName);
+                    });
+                }
 
-                        if (tourPlayer1.tourParticipants > maxNumberOfTourParticipants) {
-                            maxNumberOfTourParticipants = tourPlayer1.tourParticipants;
-                        }
-                    }
-                });
+                if (garbage.WasteType == 'Matavfall') {
+                    series[1].data.push({ y: garbage.TotalWeight });
+                }
             });
 
-            vm.compareNoOfTournamentBothParticipatedIn = series[0].data.length;
-
-            var chart = initLineChart(xTitle, categories, colors, series, maxNumberOfTourParticipants);
+            console.log(series)
+            console.log("cats", categories)
+            var chart = initLineChart(xTitle, categories, colors, series);
             return chart;
         }
 
