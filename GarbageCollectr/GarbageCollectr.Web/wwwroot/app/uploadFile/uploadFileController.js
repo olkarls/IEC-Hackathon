@@ -1,15 +1,16 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'uploadFileController';
-    angular.module('app').controller(controllerId, ['$scope', '$http', uploadFileController]);
+    angular.module('app').controller(controllerId, ['$scope', '$http', '$location', uploadFileController]);
 
-    function uploadFileController($scope, $http) {
+    function uploadFileController($scope, $http, $location) {
         $scope.responseData = null;
         $scope.activeUserStep = "start";
         $scope.isLoading = false;
         
         $scope.upload = function (file) {
             $scope.isLoading = true;
+            $scope.error = null;
 
             var fd = new FormData();
             fd.append("file", file.file);
@@ -44,8 +45,9 @@
                     $scope.activeUserStep = "moreThanOneDbThing";
                     return;
                 }
-            }, function(response) {
-                
+            }, function (response) {
+                $scope.isLoading = false;
+                $scope.error = "Could not send file...";
             });
         }
 
@@ -98,6 +100,10 @@
             }, function (response) {
 
             });
+        }
+
+        $scope.goToYourGarbage = function() {
+            $location.path('/yourGarbage');
         }
     }
 })();

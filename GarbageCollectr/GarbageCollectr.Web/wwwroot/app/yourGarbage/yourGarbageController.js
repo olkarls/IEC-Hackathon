@@ -1,15 +1,16 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'yourGarbageController';
-    angular.module('app').controller(controllerId, ['$scope', '$http', yourGarbageController]);
+    angular.module('app').controller(controllerId, ['$scope', '$http', '$location', yourGarbageController]);
 
-    function yourGarbageController($scope, $http) {
+    function yourGarbageController($scope, $http, $location) {
         $scope.responseData = null;
         $scope.isLoading = false;
         $scope.garbageChartConfig = initGarbageChart();
 
         $scope.getGarbage = function (postalCode) {
             $scope.isLoading = true;
+            $scope.error = null;
             $http({
                 url: 'stats',
                 method: 'POST',
@@ -24,7 +25,8 @@
                 $scope.garbageChartConfig = initGarbageChart($scope.responseData);
 
             }, function (response) {
-
+                $scope.error = "Could not load data...";
+                $scope.isLoading = false;
             });
         }
 
@@ -98,5 +100,8 @@
             };
         }
 
+        $scope.goToSortGarbage = function () {
+            $location.path('/');
+        }
     }
 })();
