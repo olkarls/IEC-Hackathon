@@ -12,6 +12,8 @@
 
         public DbSet<Container> Containers { get; set; }
 
+        public DbSet<GarbageCollection> GarbageCollections { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
