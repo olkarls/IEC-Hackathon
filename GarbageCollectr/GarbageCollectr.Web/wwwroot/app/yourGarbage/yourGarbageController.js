@@ -6,6 +6,7 @@
     function yourGarbageController($scope, $http) {
         $scope.responseData = null;
         $scope.isLoading = false;
+        $scope.garbageChartConfig = initGarbageChart();
 
         $scope.getGarbage = function (postalCode) {
             $scope.isLoading = true;
@@ -28,7 +29,7 @@
         }
 
         function initGarbageChart(garbageData) {
-            var xTitle = 'Garbage weight';
+            var xTitle = '';
             var categories = [];
             var colors = ['#43c83c', '#2995C7'];
             var series = [{
@@ -44,7 +45,6 @@
             ];
 
             angular.forEach(garbageData, function (garbage) {
-                console.log("garbage", garbage)
                 categories.push(garbage.CollectedAt);
 
                 if (garbage.WasteType == 'Hushållsavfall') {
@@ -60,8 +60,6 @@
                 }
             });
 
-            console.log(series)
-            console.log("cats", categories)
             var chart = initLineChart(xTitle, categories, colors, series);
             return chart;
         }
@@ -78,7 +76,6 @@
                     min: 1,
                     max: yMax,
                     tickInterval: 1,
-                    reversed: true,
                     title: {
                         text: ''
                     }
